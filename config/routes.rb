@@ -2,7 +2,7 @@ Newspaperapp::Application.routes.draw do
 
   resources :newspapers do
     collection do
-      post "newsub"
+      get "search"
     end
     resources :subscription_plans, :only=>[:new] 
   end

@@ -9,7 +9,6 @@ class NewspapersController < ApplicationController
   end
 
   def new
-
     @count = params[:sub_count].nil? ? 1 : params[:sub_count].to_i + 1
     @newspaper = Newspaper.new
     @count.times {@newspaper.subscription_plans.build}
@@ -23,5 +22,9 @@ class NewspapersController < ApplicationController
     else
       render :new
     end
+  end
+
+  def search
+    Newspaper.search(params[:newspaper])
   end
 end
