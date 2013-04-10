@@ -1,0 +1,9 @@
+<%= form_for @sub do |f| %>
+
+<%= f.label :price, "Price:" %>
+<%= f.text_field :price %>
+<%= f.select :weekly, [["Weekly", true], ["Daily", false]] %>
+<%= f.hidden_field :newspaper_id %>
+<%= f.submit %>
+
+<% end %>

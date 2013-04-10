@@ -1,0 +1,8 @@
+<h1> Newspapers </h1>
+<% @newspapers.each do |newspaper| %>
+  <li><%= link_to newspaper.title, newspaper_url(newspaper) %></li>
+
+
+<%end%>
+<br>
+<%= link_to "Create New Newspaper", new_newspaper_url %>

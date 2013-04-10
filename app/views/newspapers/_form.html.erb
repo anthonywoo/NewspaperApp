@@ -1,0 +1,24 @@
+<%= form_for @newspaper do |f| %>
+  <%= f.label :title, "Title:" %>
+  <%= f.text_field :title %>
+  <%= f.label :editor, "Editor:" %>
+  <%= f.text_field :editor %>
+  <br>
+  <br>
+  <div> Create New Sub: </div>
+  <%# f.fields_for(:subscription_plans) do |plan| %>
+  <%= f.fields_for(:subscription_plans, @newspaper.subscription_plans) do |plan| %>
+    <%= plan.label :price, "Price:" %>
+    <%= plan.text_field :price %>
+    <%= plan.select :weekly, [["Weekly", true], ["Daily", false]] %>
+    <br>
+    <%#= plan.hidden_field :newspaper_id %>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>
+
+<%#= button_to "Add New Subscription", new_newspaper_url(:num=>1), :type=>"commit", :method => :get %>
+<%= form_tag "/newspapers/new", :method=>:get %>
+<%= hidden_field_tag "sub_count", @count %>
+<%= submit_tag "More SUBS!" %>

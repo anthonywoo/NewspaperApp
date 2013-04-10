@@ -1,0 +1,9 @@
+<h2><%= @newspaper.title %> </h2>
+
+<h3> Subscription Plans </h3>
+<% @newspaper.subscription_plans.each do |plan| %>
+  <div><%= "Price: #{plan.price} | Frequency: #{frequency(plan)}"%> </div>
+
+<% end %>
+<br>
+<%= link_to "Create New Subscription", new_newspaper_subscription_plan_url(@newspaper) %>
