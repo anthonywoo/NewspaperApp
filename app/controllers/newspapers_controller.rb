@@ -1,7 +1,8 @@
 class NewspapersController < ApplicationController
 
   def index
-    @newspapers = Newspaper.all
+    @newspapers = Newspaper.search(params[:newspaper])
+    #@newspapers = Newspaper.all
   end
 
   def show
@@ -25,6 +26,7 @@ class NewspapersController < ApplicationController
   end
 
   def search
-    Newspaper.search(params[:newspaper])
+    @newspapers = Newspaper.search(params[:newspaper])
+    #render :index
   end
 end

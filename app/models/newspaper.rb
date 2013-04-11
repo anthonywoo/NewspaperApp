@@ -6,9 +6,26 @@ class Newspaper < ActiveRecord::Base
 
   def self.search(params)
     newspaper = Newspaper
-    unless params[:title].blank?
-      newspaper = newspaper.where("title like ?", "%#{params[:title]}%")
+    sub = SubscriptionPlan
+    #binding.pry
+    if params
+      unless params[:price].blank?
+        sub = sub.where("price < ?", params[:price].to_i)
+      end
+      unless params[:freq].blank?
+        bool = params[:freq] == "true" ? true : false
+        binding.pry
+        sub = sub.where("weekly = ?", bool)
+      end
+      unless params[:title].blank?
+        newspapers = []
+        sub.all.each{|sub| newspapers << sub.newspaper}
+        return newspaper.select{|paper| paper.title.match(params[:title])}.uniq
+      end
     end
-    newspaper.all
+    newspapers = []
+    #binding.pry
+    sub.all.each{|sub| newspapers << sub.newspaper}
+    return newspapers.uniq
   end
 end

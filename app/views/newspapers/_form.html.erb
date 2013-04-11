@@ -5,7 +5,7 @@
   <%= f.text_field :editor %>
   <br>
   <br>
-  <div> Create New Sub: </div>
+  <h3> Create New Sub: </h3>
   <%# f.fields_for(:subscription_plans) do |plan| %>
   <%= f.fields_for(:subscription_plans, @newspaper.subscription_plans) do |plan| %>
     <%= plan.label :price, "Price:" %>

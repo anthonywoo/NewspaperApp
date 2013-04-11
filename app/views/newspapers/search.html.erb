@@ -1,14 +1,17 @@
 <h1> Search </h1>
-<%= form_tag "/newspapers/search", :method=>:get %>
+<%= form_tag "/newspapers", :method=>:get %>
 <%= label_tag "newspaper[title]", "Title:" %>
 <%= text_field_tag "newspaper[title]" %>
 <br>
-Maximum Price:
+<%= "Maximum Price:" %>
+<br>
 <%= text_field_tag "newspaper[price]" %>
 <br>
+<div>
 <%= radio_button_tag "newspaper[freq]", "false", false, :id => "daily" %>
 <%= label_tag "daily", "Daily" %>
 <%= radio_button_tag "newspaper[freq]", "true", false, :id => "weekly" %>
 <%= label_tag "weekly", "Weekly" %>
+</div>
 <br>
 <%= submit_tag "Search" %>
