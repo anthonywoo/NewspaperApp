@@ -5,27 +5,27 @@ class Newspaper < ActiveRecord::Base
   validates :title, :presence => true
 
   def self.search(params)
-    newspaper = Newspaper
-    sub = SubscriptionPlan
-    #binding.pry
+    @sub = SubscriptionPlan
     if params
       unless params[:price].blank?
-        sub = sub.where("price < ?", params[:price].to_i)
+        @sub = @sub.where("price < ?", params[:price].to_i)
       end
+
       unless params[:freq].blank?
         bool = params[:freq] == "true" ? true : false
-        binding.pry
-        sub = sub.where("weekly = ?", bool)
+        @sub = @sub.where("weekly = ?", bool)
       end
+
       unless params[:title].blank?
         newspapers = []
-        sub.all.each{|sub| newspapers << sub.newspaper}
-        return newspaper.select{|paper| paper.title.match(params[:title])}.uniq
+        binding.pry
+        @sub.all.each{|sub| newspapers << sub.newspaper}
+        return newspapers.select{|paper| paper.title.match(params[:title])}.uniq
       end
     end
     newspapers = []
     #binding.pry
-    sub.all.each{|sub| newspapers << sub.newspaper}
+    @sub.all.each{|sub| newspapers << sub.newspaper}
     return newspapers.uniq
   end
 end
