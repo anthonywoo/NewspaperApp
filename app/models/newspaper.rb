@@ -18,13 +18,11 @@ class Newspaper < ActiveRecord::Base
 
       unless params[:title].blank?
         newspapers = []
-        binding.pry
         @sub.all.each{|sub| newspapers << sub.newspaper}
         return newspapers.select{|paper| paper.title.match(params[:title])}.uniq
       end
     end
     newspapers = []
-    #binding.pry
     @sub.all.each{|sub| newspapers << sub.newspaper}
     return newspapers.uniq
   end
