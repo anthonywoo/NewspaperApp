@@ -7,6 +7,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    #subs = SubscriptionPlan.get_subs(params[:sub])
+    #@user.subscription_plan_ids = subs
     if @user.save
       redirect_to users_url
     else
@@ -25,7 +27,10 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update_attributes(params[:user])
+    #subs = SubscriptionPlan.get_subs(params[:sub])
+    #@user.subscription_plan_ids = subs
+    @user.attributes = params[:user]
+    @user.save
     redirect_to user_url(@user)
   end
 end

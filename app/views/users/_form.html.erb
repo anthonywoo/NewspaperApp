@@ -8,13 +8,18 @@
   <div>
     <% @newspapers.each do |newspaper| %>
       <%= "#{newspaper.title}:" %>
-      <% newspaper.subscription_plans.each do |sub_plan| %>
-        <%= check_box_tag("user[subscription_plan_ids][]", sub_plan.id, @user.subscription_plan_ids.include?(sub_plan.id), :id => "sub_#{sub_plan.id}") %>
-        <%= label_tag "#{sub_plan.price} | #{frequency(sub_plan)}" %>
-      <% end %>
+      <%#= select("sub", "news_ids#{newspaper.id}", 
+              newspaper.subscription_plans.map{|plan| ["#{plan.price} | #{frequency(plan)}", plan.id]}, { :include_blank => true, :selected => 24}) %>
+      <select name="user[subscription_plan_ids][]">
+          <option value=""></option>
+        <% newspaper.subscription_plans.each do |plan| %>
+          <option value=<%=plan.id%> <%="selected" if @user.subscription_plan_ids.include?(plan.id)%>> 
+            <%="#{plan.price} | #{frequency(plan)}"%></option>
+        <% end %>
+      </select>
       <br>
     <% end %>
   </div>
-  <%= hidden_field_tag("user[subscription_plan_ids][]", "") %>
+
   <%= f.submit %>
 <% end %>
